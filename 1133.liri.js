@@ -1,20 +1,17 @@
-// var dotenv = require("dotenv").config();
+//var dotenv = require("dotenv").config();
 //var donenv2 = require("dotenv").config();
-// require("dotenv").config();
+//require("dotenv").config();
 //require('dotenv').config();
-require('dotenv').config();
+
 var fs = require("fs");
 var req = require("request");
-var Spotify = require('node-spotify-api');
 
-var keys = require('./keys.js');
-// var spotKeys = require("./keys.js");
-
+//var spotKeys = require("./keys.js");
 
 var searchType = process.argv[2];
 var searchItem = process.argv[3];
 
-var spotify = new Spotify(keys.spotify);
+//var spotify = new Spotify(keys.spotify);
 
 
 switch (searchType) {
@@ -25,8 +22,7 @@ switch (searchType) {
 
 	case 'spotify-this-song':
             console.log(searchType + ": " + searchItem);
-			// spotifying(searchItem);
-			spotifyingtwo();
+            spotify(searchItem);
 	break;
 
 	case 'movie-this':
@@ -38,7 +34,6 @@ switch (searchType) {
 	console.log("unknown search type. Please specify using 'concert-this', 'movie-this' or 'spotify-this-song'. ");
 };
 
-//Concert search
 function concert () {
 	var concertUrl = "https://rest.bandsintown.com/artists/" + searchItem + "/events?app_id=codingbootcamp";
 	req(concertUrl, function (error, response, body) {
@@ -55,7 +50,6 @@ function concert () {
 	
 };
 
-//Movie Search
 function movie () {
 	var movieUrl = "https://www.omdbapi.com/?apikey=47a2577f&t=" + searchItem;
 	// if (searchItem = null) {
@@ -85,38 +79,5 @@ function movie () {
 //}
 }
 
-//Song Search
-
-function spotifying () {
-	spotify.search({type: 'track', query: searchItem}, function (err, data) {
-		console.log("We are searching Spotify for song "+ searchItem);
-		if (!err && response.statusCode === 200) {
-
-		// if (!error && response.statusCode === 200) {
-		// 	console.log("An error occured" + error);
-		// }
-		console.log("Done searching Spotify for song "+ searchItem);
-		console.log(data);
-	}
-})
+function spotify () {
 }
-
-// var Spotify = require('node-spotify-api');
- 
-// var spotify = new Spotify({
-//   id: <your spotify client id>,
-//   secret: <your spotify client secret>
-// });
-function spotifyingtwo () {  
-	// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-		spotify.search({ type: 'track', query: searchItem }, function(err, data) {
-		// if (!err && response.statusCode === 200) {
-
-		if (err) {
-		  return console.log('Error occurred: ' + err);
-		}
-	   
-	  console.log(data); 
-		//}
-	  });
-	}
