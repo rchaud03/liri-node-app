@@ -1,7 +1,3 @@
-// var dotenv = require("dotenv").config();
-//var donenv2 = require("dotenv").config();
-// require("dotenv").config();
-//require('dotenv').config();
 require('dotenv').config();
 var fs = require("fs");
 var req = require("request");
@@ -101,15 +97,9 @@ function spotifying () {
 })
 }
 
-// var Spotify = require('node-spotify-api');
- 
-// var spotify = new Spotify({
-//   id: <your spotify client id>,
-//   secret: <your spotify client secret>
-// });
 function spotifyingtwo () {  
-	// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
 		spotify.search({ type: 'track', query: searchItem }, function(err, data) {
+		// var spotifyData = JSON.parse(data);
 		// if (!err && response.statusCode === 200) {
 
 		if (err) {
@@ -117,6 +107,8 @@ function spotifyingtwo () {
 		}
 	   
 	  console.log(data); 
+	  console.log("-------------------------------");
+	  console.log(spotifyData);
 		//}
 	  });
 	}
