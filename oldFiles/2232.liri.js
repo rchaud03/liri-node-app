@@ -6,8 +6,8 @@ var Spotify = require('node-spotify-api');
 var keys = require('./keys.js');
 
 var searchType = process.argv[2];
-// var searchItem = process.argv[3];
 var searchItem = process.argv.slice(3).join(" ");
+// var searchItem = process.argv[3];
 
 var spotify = new Spotify(keys.spotify);
 
@@ -26,7 +26,7 @@ switch (searchType) {
 
 	case 'movie-this':
 		console.log(searchType + ": " + searchItem);
-		movie();
+        movie();
 	break;
 
 	default: 
@@ -43,6 +43,7 @@ function concert () {
 			data.forEach(function(tourStop) {
                 var timeDate = moment(tourStop.datetime).format("MM/DD/YYYY");
                 
+                // console.log("\n" + "Date and Time: " + tourStop.datetime + "\n" +
                 console.log("\n" + "Date : " + timeDate + "\n" +
                 "Venue: " + tourStop.venue.name + "\n" +
 				"City: " + tourStop.venue.city + ", " + tourStop.venue.region + "\n" +
@@ -55,11 +56,14 @@ function concert () {
 	
 };
 
+
+
 //Movie Search
 function movie () {
 	var movieUrl = "https://www.omdbapi.com/?apikey=47a2577f&t=" + searchItem;
 
 		req(movieUrl, function (error, response, body) {
+   
 		var data = JSON.parse(body);
 		if (!error && response.statusCode === 200) {
 			console.log(movieUrl + "\n");
@@ -73,9 +77,11 @@ function movie () {
 					"Plot: " + data.Plot + "\n" +
 					"Country: " + data.Country +"\n" +
                     "--------------------------------------------" + "\n");
-		}
-	})
+        }
+
+    })
 }
+
 
 //Song Search
 
